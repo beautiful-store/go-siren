@@ -1,4 +1,4 @@
-module goSiren
+module github.com/beautiful-store/go-siren
 
 go 1.19
 
