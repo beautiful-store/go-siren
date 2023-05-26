@@ -18,19 +18,19 @@ const EnvironmentDev = "dev"
 type GoSiren struct {
 	TargetCodes        []int
 	TargetEnvironments []string
+	TargetHost         []string
 }
 type Content interface {
 	make() (string, string, error)
 }
 
-func (c *GoSiren) IsSending(code int, environment string) bool {
-	if slices.Contains(c.TargetEnvironments, environment) && slices.Contains(c.TargetCodes, code) {
-		return true
-	}
-	return false
+func (g *GoSiren) IsSending(code int, environment string, host string) bool {
+	return slices.Contains(g.TargetEnvironments, environment) &&
+		slices.Contains(g.TargetCodes, code) &&
+		slices.Contains(g.TargetHost, host)
 }
 
-func (c *GoSiren) Setting(content Content) (string, string, error) {
+func (g *GoSiren) Setting(content Content) (string, string, error) {
 	return content.make()
 }
 
